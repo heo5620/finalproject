@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+<!-- 0. mybatis 실행 과정 로그 찍기 -->
+<settings>
+<setting name="logImpl" value="LOG4J"/>
+</settings>
+
+<!--1. 대신 부를 이름 지정. -->
+<typeAliases>
+	<typeAlias type="spring.mybatis.board.MemberDTO" alias="memberdto"/> <!-- mybatis memberdto 필요하면 계속 memberdto로 쓸수있게 -->
+	<typeAlias type="spring.mybatis.board.BoardDTO" alias="boarddto"/> <!-- mybatis memberdto 필요하면 계속 memberdto로 쓸수있게 -->
+</typeAliases>
+
+</configuration>

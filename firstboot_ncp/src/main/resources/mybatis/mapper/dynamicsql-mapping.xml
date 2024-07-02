@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="b">
+
+<!-- int[] = {0,5} -->
+<select id="memberPagingList" resultType="memberdto">
+select * from c_members order by regtime desc limit
+<foreach collection="array" item="num" separator=",">
+#{num}
+</foreach>
+</select>
+
+<!-- int[] = {1111, 222, 3333, ...} -->
+<select id="searchMemberList" resultType="memberdto"><!-- resultType은 1개 레코드 타입 -->
+select * from c_members where pw in
+<foreach collection="array" item="pw" separator="," open="(" close=")">
+#{pw}
+</foreach>
+</select>
+
+<select id="searchMemberList2" resultType="memberdto" parameterType="java.util.HashMap">
+select * from c_members where ${colname} like #{colvalue}
+</select>
+<!-- #{변수}는 자동으로 ''붙인다. 
+${변수} - '' 안 붙인다.
+-->
+
+<select id="searchMemberList3" resultType="memberdto">
+select * from c_members
+<if test="name != null">
+where name like #{name}
+</if>
+</select>
+
+<select id="searchMemberList4" parameterType="memberdto" resultType="memberdto">
+select * from c_members where
+<choose>
+	<when test="name != null">
+	name like concat('%', #{name}, '%')
+	</when>
+	<when test="email != null">
+	name like concat('%', #{email}, '%')
+	</when>
+	<when test="phone != null">
+	name like concat('%', #{phone}, '%')
+	</when>
+	<when test="id != null">
+	name like concat('%', #{id}, '%')
+	</when>
+</choose>
+order by regtime desc;
+</select>
+
+<!-- sql 조각들. 실제 실행 x -->
+
+<!-- <sql id="membertable">
+select * from c_members
+</sql>
+
+<sql id="where">
+where id = #{id}
+</sql>
+
+<select id="totalSQL" parameterType="String" resultType="memberdto">
+<include refid="memebertable"/>
+<include refid="where"/>
+</select>
+-->
+</mapper>
