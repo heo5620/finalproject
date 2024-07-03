@@ -18,7 +18,7 @@ public class DownloadController {
 	//c:/Users/gpqls/fullstack/upload 파일 리스트 출력 - 뷰 필요
 	@RequestMapping("/filedownloadlist")
 	ModelAndView downloadlist() {
-		File f = new File("C:/Users/gpqls/fullstack/upload/");
+		File f = new File(UploadInform.uploadLocation); // /usr/mydir/upload
 		String[] filearray = f.list();
 		
 		ModelAndView mv = new ModelAndView();
@@ -31,11 +31,11 @@ public class DownloadController {
 	@GetMapping("/filedownloadresult")
 	void downloadresult(String filename, HttpServletResponse response) throws IOException{
 		response.setContentType("application/download"); //뷰 없어짐
-		response.setContentLength((int)(new File("C:/Users/gpqls/fullstack/upload/"+filename).length()));
+		response.setContentLength((int)(new File(UploadInform.uploadLocation+filename).length())); // /usr/mydir/upload
 		response.setHeader("Content-Disposition", "attachment;filename=\"" + filename + "\"");
 		
 		OutputStream out = response.getOutputStream();
-		FileInputStream fin = new FileInputStream(new File("C:/Users/gpqls/fullstack/upload/"+filename));
+		FileInputStream fin = new FileInputStream(new File(UploadInform.uploadLocation+filename)); // /usr/mydir/upload
 		FileCopyUtils.copy(fin, out);
 		fin.close();
 		out.close();

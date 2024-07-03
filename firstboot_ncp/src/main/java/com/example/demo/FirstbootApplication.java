@@ -11,7 +11,7 @@ import spring.mybatis.board.BoardController;
 //run as - spring boot app 실행
 @SpringBootApplication
 //@ComponentScan (basePackages = "com.example.demo")
-//@ComponentScan(basePackages = "upload") //자기 자신 패키지와 다르면 추가해야함.
+@ComponentScan(basePackages = "upload") //자기 자신 패키지와 다르면 추가해야함.
 //@ComponentScan(basePackageClasses = BoardController.class)
 //@ComponentScan(basePackages = {"upload","spring.mybatis.board"})
 @ComponentScan(basePackages = "boardmapper")
