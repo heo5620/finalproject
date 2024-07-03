@@ -23,7 +23,7 @@ public class UploadController {
 	//file upload
 	@PostMapping("/fileupload")
 	ModelAndView uploadResult(@ModelAttribute("dto") UploadDTO dto) throws IOException{
-		String savePath = UploadInform.uploadLocation; //파일을 저장할 곳
+		String savePath = UploadInform.uploadPath; //파일을 저장할 곳
 		//ncp서버 리눅스 /usr/mydir/upload 디렉토리 (파일 업로드 디렉토리로 설정)
 		//a.txt -> a.UUID.randomUUID().txt
 		
